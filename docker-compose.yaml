@@ -11,5 +11,13 @@ services:
     environment:
       - "ES_VERSION=${ES_VERSION}"
       - "discovery.type=single-node"
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     entrypoint:
       - /apps/install-es-plugin.sh
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:${ES_VERSION}
+    ports:
+      - "5601:5601"
+
